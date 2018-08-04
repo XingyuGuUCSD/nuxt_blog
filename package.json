@@ -1,0 +1,19 @@
+{
+  "name": "udemy_blog",
+  "version": "1.0.0",
+  "description": "My sublime Nuxt.js project",
+  "author": "alibabadeveloper",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "nuxt": "^1.4.2"
+  },
+  "devDependencies": {
+    "cross-env": "^5.0.1"
+  }
+}
