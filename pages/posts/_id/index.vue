@@ -17,23 +17,18 @@
 </template>
 
 <script>
-export default {
-  asyncData(context, callback){
-    setTimeout(() => {
-      callback(null, {
-        loadedPost:{
-          id:'1',
-          author: 'Alee GU',
-          title: '0My blog (ID: ' + context.route.params.id + ")",
-          previewText: 'balabala',
-          updatedDate: new Date(),
-          content: 'content asdjhjashdkhsadjkhasjdh',
-          thumbnaillink: 'https://res.cloudinary.com/cmgverticals/image/upload/c_crop,g_north_west,h_2377,w_4509,x_0,y_200/c_fill,h_628,q_80,w_1200/e_sharpen,f_auto,fl_lossy,q_auto/v1523999146/GettyImages-916732976_s6udvr.jpg',
+  import axios from 'axios'
+  export default {
+    asyncData(context){
+      return axios.get('https://nuxt-blog-556f3.firebaseio.com/posts/' + context.params.id + '.json')
+      .then(res => {
+        return {
+          loadedPost: res.data,
         }
       })
-    }, 1000);
+      .catch(e => context.error(e));
+    }
   }
-}
 </script>
 
 
