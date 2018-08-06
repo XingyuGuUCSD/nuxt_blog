@@ -54,7 +54,7 @@ export default {
     },
     methods:{
         onSave(){
-            this.$emit('submit', this.editedPost);
+            this.$emit('submit', this.editedPost);//pass info to the father component
         },
         onCancel(){
             this.$router.push('/admin');

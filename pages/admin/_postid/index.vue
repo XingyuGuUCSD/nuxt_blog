@@ -1,28 +1,42 @@
 <template>
     <div class="admin-post-page">
         <section class="update-form">
-            <AdminPostForm :post="loadedPost"/>
+            <AdminPostForm :post="loadedPost" @submit="onSubmitted"/>
         </section>
     </div>
 </template>
 
 <script>
 import AdminPostForm from "@/components/Admin/AdminPostForm"
+import axios from 'axios'
 export default {
-  layout:'admin',
+   layout:'admin',
    components:{
        AdminPostForm,
    },
-   data(){
-       return{
-           loadedPost:{
-               author: 'Alee GU',
-               title: 'My blog',
-               content: 'balabala',
-               thumbnaillink: 'https://res.cloudinary.com/cmgverticals/image/upload/c_crop,g_north_west,h_2377,w_4509,x_0,y_200/c_fill,h_628,q_80,w_1200/e_sharpen,f_auto,fl_lossy,q_auto/v1523999146/GettyImages-916732976_s6udvr.jpg'
-           }
-       }
-   }
+   methods:{
+     onSubmitted(editedPost){
+       axios.put('https://nuxt-blog-556f3.firebaseio.com/posts/' + this.$route.params.postId + '.json', editedPost)
+       .then(res => console.log(res))
+       .catch(e => console.log(e))
+       
+     }
+   },
+   asyncData(context){
+      return axios.get(
+        "https://nuxt-blog-556f3.firebaseio.com/posts/" +
+          context.params.postId +
+          ".json"
+      )
+      .then(res => {
+        return {
+          loadedPost: {...res.data, id: context.params.postId},
+        }
+      })
+      .catch(e => context.error(e));
+   },
+
+   
 }
 </script>
 

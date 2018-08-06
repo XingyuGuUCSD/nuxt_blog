@@ -7,7 +7,7 @@
                 <div>Written by {{loadedPost.author}}</div>
             </div>
 
-            <p class="post-content">{{loadedPost.content}}t</p>
+            <p class="post-content">{{loadedPost.content}}</p>
         </section>
 
         <section class="post-feedback">
