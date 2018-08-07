@@ -8,7 +8,7 @@
 
 <script>
 import AdminPostForm from "@/components/Admin/AdminPostForm"
-import axios from 'axios'
+
 export default {
    layout:'admin',
    components:{
@@ -16,7 +16,7 @@ export default {
    },
    methods:{
      onSubmitted(editedPost){
-       axios.put('https://nuxt-blog-556f3.firebaseio.com/posts/' + this.$route.params.postId + '.json', editedPost)
+       this.$axios.$put('/posts/' + this.$route.params.postId + '.json', editedPost)
        .then(res => console.log(res))
        .catch(e => console.log(e))
        
@@ -25,14 +25,14 @@ export default {
    asyncData(context){
       console.log("context")
       console.log(context);
-      return axios.get(
-        "https://nuxt-blog-556f3.firebaseio.com/posts/" +
+      return this.$axios.$get(
+        "/posts/" +
           context.params.postid +
           ".json"
       )
-      .then(res => {
+      .then(data => {
         return {
-          loadedPost: {...res.data, id: context.params.postid},
+          loadedPost: {...data, id: context.params.postid},
         }
       })
       .catch(e => context.error(e));
