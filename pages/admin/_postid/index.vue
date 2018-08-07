@@ -23,14 +23,16 @@ export default {
      }
    },
    asyncData(context){
+      console.log("context")
+      console.log(context);
       return axios.get(
         "https://nuxt-blog-556f3.firebaseio.com/posts/" +
-          context.params.postId +
+          context.params.postid +
           ".json"
       )
       .then(res => {
         return {
-          loadedPost: {...res.data, id: context.params.postId},
+          loadedPost: {...res.data, id: context.params.postid},
         }
       })
       .catch(e => context.error(e));
