@@ -1,13 +1,13 @@
 <template>
     <div class="single-post-page">
         <section class="post">
-            <h1 class="post-title">{{loadedPost.title}}</h1>
-            <div class="post-details">
+            <h1 class="post-title" v-if="loadedPost">{{loadedPost.title}}</h1>
+            <div class="post-details" v-if="loadedPost">
                 <div>Last updated on {{loadedPost.updatedDate | date}}</div>
                 <div>Written by {{loadedPost.author}}</div>
             </div>
 
-            <p class="post-content">{{loadedPost.content}}</p>
+            <p class="post-content" v-if="loadedPost">{{loadedPost.content}}</p>
         </section>
 
         <section class="post-feedback">

@@ -8,6 +8,8 @@
 import PostList from "@/components/Posts/PostList";
 
 export default {
+  //work only on the page component
+  middleware: 'log',
   components: {
     PostList
   },
