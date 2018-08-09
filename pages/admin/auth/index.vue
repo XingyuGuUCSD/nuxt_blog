@@ -35,20 +35,15 @@ export default {
   },
   methods: {
     onSumbit(){
-      let authUrl = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=' + process.env.fbAPIKey;
-      if(!this.isLogin){
-        authUrl = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=' + process.env.fbAPIKey;
-      }
-      this.$axios.$post(authUrl, {
+      this.$store.dispatch('authenticateUser', {
+        isLogin: this.isLogin,
         email: this.email,
-        password: this.password,
-        returnSecureToken: true,
+        password: this.password
       })
-      .then(result => {
-        console.log(result);
-      })
-      .catch(e => console.log(e));
-      
+      .then(() => {
+        console.log("enter then block");
+        this.$router.push('/admin');
+      });
     }
   }
 }

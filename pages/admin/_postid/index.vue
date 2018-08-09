@@ -16,17 +16,16 @@ export default {
    },
    methods:{
      onSubmitted(editedPost){
-       this.$axios.$put('/posts/' + this.$route.params.postId + '.json', editedPost)
-       .then(res => console.log(res))
-       .catch(e => console.log(e))
+       this.$store.dispatch("editPost", editedPost).then(() => {
+       this.$router.push("/admin");
+      });
        
      }
    },
    asyncData(context){
-      console.log("context")
-      console.log(context);
-      return this.$axios.$get(
-        "/posts/" +
+      
+      return context.$axios.$get(
+        process.env.baseUrl + "/posts/" +
           context.params.postid +
           ".json"
       )
