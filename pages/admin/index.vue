@@ -18,12 +18,14 @@ import AppButton from '@/components/UI/AppButton'
 
 export default {
   layout: 'admin',
+  middleware: ['check-auth','auth'],
   components: {
     PostList,
     AppButton
   },
   computed: {
     loadedPosts() {
+      console.log("in computed function of admin index")
       return this.$store.getters.loadedPosts
     }
   }
